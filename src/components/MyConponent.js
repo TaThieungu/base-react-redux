@@ -1,3 +1,4 @@
+import { eventWrapper } from "@testing-library/user-event/dist/utils";
 import React from "react";
 class MyComponent extends React.Component{
 
@@ -5,25 +6,32 @@ class MyComponent extends React.Component{
         name : "tuan anh",
         address : "Nam dinh"
     };
-    handleCLick(event){
+    handleCLick = (event) => {
         console.log("Nguyen Tuan Anh ne")
+        this.setState({
+            name : "ok"
+        })
     }
-    handleOnMoverOver(){
-        console.log("ok")
+    ChangeText = (event) =>{
+        this.setState({
+            name : event.target.value
+        })
+    }
+    PickValue=(event) =>{
+        event.preventDefault();
+        console.log(this.state.name +"\n"+this.state.address)
     }
     //JSX
     render(){
         return(
             <div>
                 My name is {this.state.name}
-                <button onClick = {
-                    this.handleCLick
-                    }>
-                    Click me now !
-                </button>
-                <button onMouseOver={this.handleOnMoverOver}>
-                    Holder
-                </button>
+                <form onSubmit={(event)=>this.PickValue(event)}>
+                    <input type = 'text'
+                    onChange={(event) => this.ChangeText(event)}/>
+                    <button>click</button>
+                    
+                </form>
             </div>
         ) 
     }
