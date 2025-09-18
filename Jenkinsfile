@@ -7,7 +7,7 @@ pipeline{
   stages{
     stage("Clean Workspace"){
       steps{
-        cleanws()
+        cleanWs()
       }
     }
     stage("Checkout from SCM"){
